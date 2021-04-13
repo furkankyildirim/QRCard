@@ -1,0 +1,5 @@
+SERVER_CLIENT_HOST : Your_server_host
+SERVER_CLIENT_PORT : Your_server_port
+MONGO_CLIENT : mongodb_url
+SENDER_EMAIL_ACCOUNT : Sender_email_account
+SENDER_EMAIL_PASSWORD : Sender_email_password
