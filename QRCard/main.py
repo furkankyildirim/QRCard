@@ -72,14 +72,13 @@ class Users():
             "lastAuth": datetime.datetime.now()
         }
         self.__users.insert_one(user)
-        self.sendVerfCode(_id, email)
         return {"message": "new-user-registered", "user": user, "result": True}
 
     def compRegister(self, _id, username, fullname, image):
         qrCode = Functions().createQR(username)
         query = {"_id": _id}
 
-        image = open("images/user.jpg", "rb") if image == None else image
+        image = open("QRCard/images/user.jpg", "rb") if image == None else image
         values = {
             "username": username,
             "fullname": fullname,
@@ -313,9 +312,9 @@ class Functions():
         qr.add_data('qrcard.app/'+username)
         qr.make(fit=True)
         qr = qr.make_image(fill='black', back_color="white")
-        qr.save("images/{}.jpg".format(username))
-        qr = open("images/{}.jpg".format(username), "rb").read()
-        os.remove("images/{}.jpg".format(username))
+        qr.save("QRCard/images/{}.jpg".format(username))
+        qr = open("QRCard/images/{}.jpg".format(username), "rb").read()
+        os.remove("QRCard/images/{}.jpg".format(username))
 
         return qr
 
