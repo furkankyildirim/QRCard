@@ -17,7 +17,7 @@ $ git tag
 
 Create a virtualenv and activate it:
 ```shell
-$ python3 -m venv venv
+$ python3 -m venv venv --without-pip
 $ source venv/bin/activate
 ```
 
