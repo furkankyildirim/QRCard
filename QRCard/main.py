@@ -325,6 +325,7 @@ class Functions():
 
     @classmethod
     def senderEmail(cls, email):
+        config = readTxt()
         receiverEmail = email
         randomCode = ''
         for i in range(6):
