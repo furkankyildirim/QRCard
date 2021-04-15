@@ -290,14 +290,18 @@ class Users():
         return {"message": "Verification Code Sended", "result": True}
 
     def approveEmail(self, _id, code):
-        confirmCode = self.getProfile("_id", _id)["user"]["confirmCode"]
-        code = Functions().encryptValue(code)
-        if code == confirmCode:
-            self.__users.update_one({"_id": _id}, {'$set': {"isVerify": True}})
-            return {"message": "Verification Code is true", "result": True}
+        query = {"_id":_id}
+        user = self.__users.find_one(query)
+        if user != None:
+            confirmCode = user["confirmCode"]
+            code = Functions().encryptValue(code)
+            if code == confirmCode:
+                self.__users.update_one({"_id": _id}, {'$set': {"isVerify": True}})
+                return {"message": "Verification Code is true", "result": True}
+            else:
+                return {"message": "Verification Code is wrong", "result": False}
         else:
             return {"message": "Verification Code is wrong", "result": False}
-
 
 class Functions():
     @classmethod
