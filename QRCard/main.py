@@ -132,6 +132,10 @@ class Users():
         else:
             data
 
+    def delete(self, _id):
+        self.__users.delete_one({'_id':_id})
+        return {"message": "User-successfully-deleted",  "result": True, } 
+    
     def getProfile(self, typeOf, value):
         query = {typeOf: value}
         user = self.__users.find_one(query)

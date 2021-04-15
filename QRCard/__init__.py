@@ -107,6 +107,15 @@ def update():
     else:
         return {"message": "User id is incorrector", "user": {}, "result": False}
 
+@app.route('/api/v1/delete/json',methods=['DELETE'])
+def delete():
+    _id = request.args.get('id', None)
+
+    if server_att.checkId(_id):
+        return server_att.delete(_id)
+    else:
+        return {"message": "User id is incorrector", "user": {}, "result": False}
+
 
 @app.route('/api/v1/accounts/add/json', methods=['POST'])
 def addAccount():
