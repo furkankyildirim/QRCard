@@ -28,7 +28,6 @@ class Users():
         user = self.__users.find_one(query)
         if user != None:
             password = Functions().encryptValue(password)
-            print(password)
             if password == user["password"]:
                 if user["username"] != None and user["_id"] != None:
                     user.pop('password')
