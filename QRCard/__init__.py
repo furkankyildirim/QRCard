@@ -102,7 +102,7 @@ def update():
     fullname = request.args.get('fullname', None)
     image = request.files.get('image', None)
 
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.update(_id, email, username, fullname, image)
     else:
         return {"message": "User id is incorrector", "user": {}, "result": False}
@@ -111,7 +111,7 @@ def update():
 def delete():
     _id = request.args.get('id', None)
 
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.delete(_id)
     else:
         return {"message": "User id is incorrector", "user": {}, "result": False}
@@ -122,7 +122,7 @@ def addAccount():
     _id = request.args.get('id', None)
     platform = request.args.get('platform', None)
     account = request.args.get('account', None)
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.addAccount(_id, platform, account)
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
@@ -133,7 +133,7 @@ def deleteAccount():
     _id = request.args.get('id', None)
     platform = request.args.get('platform', None)
 
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.deleteAccount(_id, platform)
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
@@ -144,7 +144,7 @@ def updateAccount():
     _id = request.args.get('id', None)
     platform = request.args.get('platform', None)
     account = request.args.get('account', None)
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.updateAccount(_id, platform, account)
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
@@ -154,7 +154,7 @@ def updateAccount():
 def getAccounts():
     _id = request.args.get('id', None)
 
-    if server_att.checkId(_id):
+    if server_att.checkId(_id) == True:
         return server_att.getAccounts(_id)
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
@@ -165,7 +165,7 @@ def getAccounts():
 #     _id = request.args.get('id', None)
 #     value = request.args.get('value', None)
 
-#     if server_att.checkId(_id):
+#     if server_att.checkId(_id) == True:
 #         return server_att.search(value)
 #     else:
 #         return {"message": "User id is incorrect", "users": {}, "result": False}
@@ -176,7 +176,7 @@ def cards():
     if request.method == 'GET':
         _id = request.args.get('id', None)
 
-        if server_att.checkId(_id):
+        if server_att.checkId(_id) == True:
             return server_att.getUsers(_id)
         else:
             return {"message": "User id is incorrect", "result": False}
@@ -184,7 +184,7 @@ def cards():
         _id = request.args.get('id', None)
         user = request.args.get('user', None)
 
-        if server_att.checkId(_id):
+        if server_att.checkId(_id) == True:
             return server_att.addUser(_id, user)
         else:
             return {"message": "User id is incorrect", "result": False}
