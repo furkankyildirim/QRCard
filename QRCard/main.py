@@ -121,7 +121,8 @@ class Users():
 
             qrcode = Functions().createQR(username)
             user["qrcode"] = qrcode
-            user["profile"] = image.read() if image != None else user["profile"]
+            if image != None:
+                user["profile"] = image.read() 
 
             self.__users.update_one({"_id": _id}, {'$set': user})
             user["profile"] = b64encode(user["profile"]).decode("ascii") if image != None else user["profile"]
