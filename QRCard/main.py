@@ -77,12 +77,11 @@ class Users():
         qrCode = Functions().createQR(username)
         query = {"_id": _id}
 
-        image = 'data:image/jpeg;base64,' + b64encode(open("QRCard/images/user.jpg", "rb").read()).decode("ascii") if image == None else image
-
+        image = open("QRCard/images/user.jpg", "rb") if image == None else image
         values = {
             "username": username,
             "fullname": fullname,
-            "profile": image,
+            "profile": image.read(),
             "qrcode": qrCode,
             "lastAuth": datetime.datetime.now()
         }
@@ -120,13 +119,13 @@ class Users():
             elif fullname == None:
                 return {"message": "fullname-cannot-be-empty", "result": False}
 
-            image = 'data:image/jpeg;base64,' + b64encode(open("QRCard/images/user.jpg", "rb").read()).decode("ascii") if image == None else image
-
             qrcode = Functions().createQR(username)
-            user["image"] = image
             user["qrcode"] = qrcode
+            if image != None:
+                user["profile"] = image.read()
 
             self.__users.update_one({"_id": _id}, {'$set': user})
+            user["profile"] = b64encode(user["profile"]).decode("ascii")
             user["qrcode"] = b64encode(user["qrcode"]).decode("ascii")
 
             return {"message": "update-completed", "user": user, "result": True}
@@ -147,6 +146,7 @@ class Users():
         user.pop('_id')
         user.pop('password')
         user["qrcode"] = b64encode(user["qrcode"]).decode("ascii")
+        user["profile"] = b64encode(user["profile"]).decode("ascii")
 
         return {"message": "User-successfully-received", "user": user, "result": True, }
 

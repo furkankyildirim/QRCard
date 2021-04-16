@@ -78,7 +78,7 @@ def compRegister():
     _id = request.args.get('id', None)
     username = request.args.get('username', None)
     fullname = request.args.get('fullname', None)
-    image = request.args.get('image', None)
+    image = request.files.get('image', None)
 
     if server_att.checkId(_id) == False:
         return {"message": "User id is incorrect", "user": {}, "result": False}
@@ -100,7 +100,7 @@ def update():
     email = request.args.get('email', None)
     username = request.args.get('username', None)
     fullname = request.args.get('fullname', None)
-    image = request.args.get('image', None)
+    image = request.files.get('image', None)
 
     if server_att.checkId(_id) == True:
         return server_att.update(_id, email, username, fullname, image)
