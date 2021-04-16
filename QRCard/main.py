@@ -32,8 +32,6 @@ class Users():
                 if user["username"] != None and user["_id"] != None:
                     user.pop('password')
                     user["qrcode"] = b64encode(user["qrcode"]).decode("ascii")
-                    user["profile"] = b64encode(
-                        user["profile"]).decode("ascii")
                     self.__users.update_one(
                         query, {'$set': {"lastAuth": datetime.datetime.now()}})
                     return {"message": "login-successfully", "user": user, "result": True, }
