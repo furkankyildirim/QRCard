@@ -100,7 +100,6 @@ class Users():
             if email != user["email"]:
                 checker = self.checkEmail(email)
                 if checker["result"]:
-                    user["email"] = email
                     self.sendVerfCode(_id, email)
                 else:
                     return checker
@@ -289,14 +288,14 @@ class Users():
         self.__users.update_one(query, {'$set': value})
         return {"message": "Verification Code Sended", "result": True}
 
-    def approveEmail(self, _id, code):
+    def approveEmail(self, _id, email, code):
         query = {"_id":_id}
         user = self.__users.find_one(query)
         if user != None:
             confirmCode = user["confirmCode"]
             code = Functions().encryptValue(code)
             if code == confirmCode:
-                self.__users.update_one({"_id": _id}, {'$set': {"isVerify": True}})
+                self.__users.update_one({"_id": _id}, {'$set': {"isVerify": True, "email": email}})
                 return {"message": "Verification Code is true", "result": True}
             else:
                 return {"message": "Verification Code is wrong", "result": False}

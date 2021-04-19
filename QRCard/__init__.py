@@ -65,10 +65,11 @@ def sendVerfCode():
 @app.route('/api/v1/register/approveEmail/json', methods=['POST'])
 def approveEmail():
     _id = request.args.get('id', None)
+    email= request.args.get('email', None)
     code = request.args.get('confirmCode', None)
 
     if server_att.checkId(_id) == True:
-        return server_att.approveEmail(_id, code)
+        return server_att.approveEmail(_id, email, code)
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
 
