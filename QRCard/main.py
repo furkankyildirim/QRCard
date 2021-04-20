@@ -148,7 +148,7 @@ class Users():
     def isVerified(self, _id):
         query = {'_id': _id}
         user = self.__users.find_one(query)
-        return user["isVerify"]
+        return {"message": "User email has checked", "user": user["isVerify"], "result": True}
 
     def checkId(self, _id):
         query = {'_id': _id}
