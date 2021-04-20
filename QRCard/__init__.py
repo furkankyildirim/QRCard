@@ -5,6 +5,7 @@ app = Flask(__name__)
 server_att = main.Users()
 variables = server_att.variables
 
+
 @app.route('/')
 def index():
     return jsonify(Home='Welcome')
@@ -61,6 +62,7 @@ def sendVerfCode():
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
 
+
 @app.route('/api/v1/register/isVerified/json', methods=['GET'])
 def isVerified():
     _id = request.args.get('id', None)
@@ -70,10 +72,11 @@ def isVerified():
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
 
+
 @app.route('/api/v1/register/approveEmail/json', methods=['POST'])
 def approveEmail():
     _id = request.args.get('id', None)
-    email= request.args.get('email', None)
+    email = request.args.get('email', None)
     code = request.args.get('confirmCode', None)
 
     if server_att.checkId(_id) == True:
@@ -116,7 +119,20 @@ def update():
     else:
         return {"message": "User id is incorrector", "user": {}, "result": False}
 
-@app.route('/api/v1/delete/json',methods=['DELETE'])
+
+@app.route('/api/v1/changePassword/json', methods=['POST'])
+def changePassword():
+    _id = request.args.get('id', None)
+    oldPassword = request.args.get('oldPassword', None)
+    newPassword = request.args.get('newPassword', None)
+
+    if server_att.checkId(_id) == True:
+        return server_att.changePassword(_id, oldPassword, newPassword)
+    else:
+        return {"message": "User id is incorrector", "user": {}, "result": False}
+
+
+@app.route('/api/v1/delete/json', methods=['DELETE'])
 def delete():
     _id = request.args.get('id', None)
 

@@ -128,6 +128,26 @@ class Users():
         else:
             data
 
+    def changePassword(self, _id, oldPassword, newPassword):
+        query = {"_id": _id}
+        user = self.__users.find_one(query)
+
+        oldPassword = Functions().encryptValue(oldPassword)
+        if oldPassword == user["password"]:
+            if len(password) >= 8:
+                newPassword = Functions().encryptValue(newPassword)
+                user["password"] = newPassword
+                self.__users.update_one(query, {'$set': user})
+                
+                return {"message": "password-changed", "result": True,} 
+            else:
+                return {"message": "weak-password", "result": False}
+
+        else:
+            return {"message": "wrong-password", "result": False, } 
+
+
+
     def delete(self, _id):
         self.__users.delete_one({'_id':_id})
         return {"message": "User-successfully-deleted",  "result": True, } 
