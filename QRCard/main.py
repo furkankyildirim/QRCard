@@ -112,7 +112,7 @@ class Users():
                     return checker
 
             if fullname != user["fullname"] and fullname != None:
-                user["fullaname"] = fullname
+                user["fullname"] = fullname
             elif fullname == None:
                 return {"message": "fullname-cannot-be-empty", "result": False}
 
