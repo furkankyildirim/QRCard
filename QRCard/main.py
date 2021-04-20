@@ -145,6 +145,11 @@ class Users():
 
         return {"message": "User-successfully-received", "user": user, "result": True, }
 
+    def isVerified(self, _id):
+        query = {'_id': _id}
+        user = self.__users.find_one(query)
+        return user["isVerify"]
+
     def checkId(self, _id):
         query = {'_id': _id}
         if self.__users.find_one(query) != None:

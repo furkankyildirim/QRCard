@@ -61,6 +61,14 @@ def sendVerfCode():
     else:
         return {"message": "User id is incorrect", "user": {}, "result": False}
 
+@app.route('/api/v1/register/isVerified/json', method=['GET'])
+def isVerified():
+    _id = request.args.get('id', None)
+
+    if server_att.checkId(_id) == True:
+        return server_att.isVerified(_id)
+    else:
+        return {"message": "User id is incorrect", "user": {}, "result": False}
 
 @app.route('/api/v1/register/approveEmail/json', methods=['POST'])
 def approveEmail():
