@@ -100,6 +100,8 @@ class Users():
             if email != user["email"]:
                 checker = self.checkEmail(email)
                 if checker["result"]:
+                    user.pop('confirmCode')
+                    user.pop('isVerify')
                     self.sendVerfCode(_id, email)
                 else:
                     return checker
