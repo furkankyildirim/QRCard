@@ -134,7 +134,7 @@ class Users():
 
         oldPassword = Functions().encryptValue(oldPassword)
         if oldPassword == user["password"]:
-            if len(password) >= 8:
+            if len(newPassword) >= 8:
                 newPassword = Functions().encryptValue(newPassword)
                 user["password"] = newPassword
                 self.__users.update_one(query, {'$set': user})
