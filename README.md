@@ -1,6 +1,6 @@
 # QRCard
 
-This repo contains QRCard Server codes written in Flask.
+This repo contains Business card web and mobile application server where users can keep and share all their social media accounts with Python Flask using QR Code and NFC technologies.
 
 ## Installation
 
